@@ -1,0 +1,44 @@
+DAA LAB EXPERIMENTS
+
+1. Insertion
+2. Selection 
+3. Quick
+4. Merge Sort 
+5. Knapsack
+6. Job sequencing with deadlines
+7. Prim's
+8. Kruskal
+9. 0,1 Knapsack
+10. Single Shortest Dijkstra
+11. Floyd Warshall
+
+algo of Knapsack
+function fractionalKnapsack(values, weights, capacity):
+    n = length(values)
+    # Calculate value per unit weight for each item
+    for i from 0 to n-1:
+        values[i] = values[i] / weights[i]
+
+    # Create a list of (index, value per unit weight) pairs and sort it in descending order
+    index_value_pairs = [(i, values[i]) for i from range(n)]
+    index_value_pairs.sort(key=lambda x: x[1], reverse=True)
+
+    total_value = 0
+    remaining_capacity = capacity
+    # Iterate through the sorted list and add items to the knapsack
+    for pair in index_value_pairs:
+        index, value_per_unit_weight = pair
+        weight_to_take = min(remaining_capacity, weights[index])
+        total_value += weight_to_take * value_per_unit_weight
+        remaining_capacity -= weight_to_take
+        if remaining_capacity == 0:
+            break
+
+    return total_value
+
+# Example usage:
+values = [60, 100, 120]
+weights = [10, 20, 30]
+capacity = 50
+result = fractionalKnapsack(values, weights, capacity)
+print("Maximum value in Knapsack =", result)
